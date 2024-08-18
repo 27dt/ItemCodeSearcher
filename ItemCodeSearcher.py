@@ -1,26 +1,46 @@
-'''
-Outside of school, I work part time in the meat department at a grocery store. 
-One of my responsibilities is to be able to price items, which often come without a label. 
-My job is to input the item's specific inventory code, and then weigh it on the scale, 
-which assigns a price to it that corresponds to its code (example: inputting 85522 on the scale 
-sets up the scale for us to be able to weigh and price chicken cutlets, which always comes unpriced 
-from the factory). With all the products we carry, there is an extensive and ever-growing list 
-printed out in the back room of the employee area. This list is now over 80 items long, and 
-although I have memorized most of the codes I need, I know many others have not.
-
-There are two problems I intend to solve with my code: for starters, I want to create a program 
-that allows a user to search through a list of all the code/item combinations. To do this, I 
-must digitize the paper list into a text file, and allow the user to enter a search query (chicken, beef,
-ham, etc), to which the program will output all results that match the input value. Second, I want to give the 
-user the ability to add a new item to the list. This will be done by retrieving values for the scale 
-code - and the product name - from the user, and writing it to the end of the existing text file. 
-This way, the new item becomes a part of the existing list, and the user now has the ability to search for it.
-
-Daniel Trakas
-'''
-
-# For sys.exit, in order to allow user to exit program.
 import sys
+import sqlite3
+
+conn = sqlite3.connect('items.db')
+
+cur = conn.cursor()
+
+'''
+cur.execute(
+    """CREATE TABLE items (
+        ID          int,
+        Name        text,
+        Category    text,
+        Price       real
+        )""")
+'''
+
+#cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+        
+cur.execute("SELECT * FROM items WHERE ID = 85522")
+print(cur.fetchone())
+
+conn.commit()
+
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 
 # Function that reads txt file, and converts lines into a dictionary.
 def createDict():
@@ -127,3 +147,6 @@ while userInput != "QUIT":
 # Uses sys to terminate program if "QUIT" is input.
 if userInput == "QUIT":
     sys.exit()
+
+
+    '''
