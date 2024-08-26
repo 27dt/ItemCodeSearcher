@@ -1,41 +1,86 @@
-5281,Beef Finger Rib Bnls
-80260,Spanish Fresh Cheese
-18365,PC FF CP Breast Bnls Skinless
-85260,PC FF TP Breast Bnls Skinless
-85520,PC FF Breast Skin On
-85522,PC FF Breast Cutlets
-36972,PC FF CP Thighs
-18349,PC FF TP Thighs
-18205,PC FF CP Thighs Bnls Skinless
-85261,PC FF TP Thighs Bnls Skinless
-41664,PC FF CP Drumsticks
-85262,PC FF TP Drumsticks
-18371,PC FF CP Wings Split
-11670,PC FF TP Wings Split
-85259,PC FF Whole Chicken
-17350,Prime Thighs
-17248,Prime Drums
-5913,Chicken Backs
-19247,CP Breast Bnls Skinless
-19426,TP Breast Bnls Skinless
-19378,CP Thighs
-11481,CP Breast Fillet
-19408,CP Thighs Bnls Skinless
-15290,CP Wings Split
-19399,Whole Chicken
-38360,Halal Extra Lean Ground Chicken
-57997,Halal Chicken Breast
-57994,Halal Chicken Thighs
-14910,Halal Chicken Drumsticks
-58082,Halal Chicken Wings
-14930,Halal Whole Chicken
-14856,Halal Chicken Legs
-36403,Cornish Hen
-2100,Frozen Duck
-2125,Frozen Geese
-14823,Cook's Half Ham Portions
-11135,Cook's Whole Smoked Picnic Ham
-15339,Half Ham Toupie
-18304,PC Applewood Spiral Ham
-37345,PC Boneless Spiral Ham
-18305,PC Hickory Brown Sugar Spiral Ham
+5281,Beef Finger Rib Bnls,Beef,21.58
+80260,Spanish Fresh Cheese,Cheese,22.90
+18365,CP Breast Bnls Skinless,Chicken PC FF,18.72
+85260,TP Breast Bnls Skinless,Chicken PC FF,20.92
+85520,Breast Skin On,Chicken PC FF,12.10
+85522,Breast Cutlets,Chicken PC FF,19.82
+36972,CP Thighs,Chicken PC FF,11.00
+18349,TP Thighs,Chicken PC FF,11.00
+18205,CP Thighs Bnls Skinless,Chicken PC FF,19.82
+39133,TP Thighs Bnls Skinless,Chicken PC FF,19.82
+41664,CP Drumsticks,Chicken PC FF,12.10
+39134,TP Drumsticks,Chicken PC FF,12.10
+18371,CP Wings Split,Chicken PC FF,16.07
+11670,TP Wings Split,Chicken PC FF,16.07
+51911,Whole Chicken,Chicken PC FF,11.00
+17350,Prime Thighs,Chicken Prime,0.00
+17248,Prime Drums,Chicken Prime,0.00
+5913,Chicken Backs,Chicken Regular,0.00
+19247,CP Breast Bnls Skinless,Chicken Regular,0.00
+19426,TP Breast Bnls Skinless,Chicken Regular,0.00
+19378,CP Thighs,Chicken Regular,0.00
+11481,CP Breast Fillet,Chicken Regular,0.00
+19408,CP Thighs Bnls Skinless,Chicken Regular,0.00
+15290,CP Wings Split,Chicken Regular,0.00
+19399,Whole Chicken,Chicken Regular,0.00
+38360,Extra Lean Ground Chicken,Chicken Sufra,0.00
+57997,Chicken Breast,Chicken Sufra,0.00
+57994,Thighs,Chicken Sufra,0.00
+14910,Drumsticks,Chicken Sufra,0.00
+58082,Wings,Chicken Sufra,0.00
+14930,Whole Chicken,Chicken Sufra,0.00
+14856,Legs,Chicken Sufra,0.00
+36403,Cornish Hen,Cornish Hen,0.00
+2100,Frozen Duck,Duck,0.00
+2125,Frozen Geese,Geese,0.00
+14823,Cook's Half Ham Portions,Hams,0.00
+11135,Cook's Whole Smoked Picnic Ham,Hams,0.00
+15339,Half Ham Toupie,Hams,0.00
+18304,PC Applewood Spiral Ham,Hams,0.00
+37345,PC Boneless Spiral Ham,Hams,0.00
+18305,PC Hickory Brown Sugar Spiral Ham,Hams,0.00
+36924,SCH Festive Half Ham,Hams,0.00
+36923,SCH Festive Halm Ham LG,Hams,0.00
+10927,Whole Toupie,Hams,0.00
+751,Lamb Leg Short Cut Frozen,Lamb,0.00
+84862,NZ Lamb Rack Frenched Frozen,Lamb,0.00
+13259,Meat Deal $1.50,Meat Deal,0.00
+37831,PC WOF Chicken Wings Buffalo,PC WOF Chicken,0.00
+37833,PC WOF Chicken Flattened Greek,PC WOF Chicken,0.00
+37834,PC WOF Flattened Portugese,PC WOF Chicken,0.00
+37830,PC WOF Wings Nashville,PC WOF Chicken,0.00
+37838,PC WOF Chicken Shawarma,PC WOF Chicken,0.00
+37832,PC WOF Drumsticks Buffalo,PC WOF Chicken,0.00
+37837,Chicken Legs Jamaican Jerk,PC WOF Chicken,0.00
+35896,Whole Flattened,PC WOF Chicken,0.00
+15477,US Back Ribs,Pork,0.00
+29926,Pork Cornmeal 3rd's,Pork,0.00
+14221,Price Match,Price Match,0.00
+6132,No Name Cottage Roll,Processed Meat,0.00
+3825,ML Wax Bologna Chub,Processed Meat,0.00
+83074,Golden Pompano,Seafood,0.00
+38513,Can FRZ Steelhead Trout,Seafood,0.00
+2694,Fresh Grade A 3-5,Turkey Fresh A,0.00
+1754,Fresh Grade A 5-7,Turkey Fresh A,0.00
+1542,Fresh Grade A 7-9,Turkey Fresh A,0.00
+13588,Fresh Grade A 9-11,Turkey Fresh A,0.00
+1756,BBall Fresh Turkey 3-5,Turkey Fresh BB,0.00
+7413,BBall Fresh Turkey 5-7,Turkey Fresh BB,0.00
+7420,BBall Fresh Turkey 7-9,Turkey Fresh BB,0.00
+36196,Breast Fillet,Turkey Parts,0.00
+36194,Breast Roast,Turkey Parts,0.00
+36199,Breast Scallopini,Turkey Parts,0.00
+36201,Breast Split,Turkey Parts,0.00
+36203,Breast Stir Fry,Turkey Parts,0.00
+36193,Breast Bnls Skinless,Turkey Parts,0.00
+36195,Drumstick,Turkey Parts,0.00
+36204,Thighs,Turkey Parts,0.00
+36202,Split Wings,Turkey Parts,0.00
+35300,Turkey Sufra Halal,Turkey Sufra Halal,0.00
+51867,Veal Cutlets,Veal,0.00
+16719,PC Whole Chicken,Chicken PC,0.00
+12820,Pork Side Rib Cov,Pork,0.00
+51867,Fontaine Veal Leg Cutlets,Veal,0.00
+15213,Frozen Lamb Shanks,Lamb,0.00
+13085,Salmon Fillet Fresh,Salmon,0.00
+14218,Pork Loin Half Centre and Sirloin,Pork,4.32

@@ -17,31 +17,6 @@ cur.execute(
 
 #cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
         
-cur.execute("SELECT * FROM items WHERE ID = 85522")
-print(cur.fetchone())
-
-conn.commit()
-
-conn.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-
 # Function that reads txt file, and converts lines into a dictionary.
 def createDict():
     # Opens file for reading and initializes dictionary.
@@ -53,14 +28,50 @@ def createDict():
 
     # Reads line and splits at comma, then adds line to dictionary, and stript \n character.
     for line in fhndl:
-        itemCode, itemName = line.split(",")
-        itemName = itemName.strip() 
-        itemDict[itemCode] = itemName
+        itemCode, itemName, itemCat, itemPrice = line.split(",")
+        itemCode = int(itemCode)
+        itemPrice = float(itemPrice)
+        itemDict[itemCode] = [itemName, itemCat, itemPrice]
 
     # Closes file.
     fhndl.close()
 
+createDict()
 
+itemarray = []
+for key in itemDict:
+    itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
+
+#print (itemarray)
+
+'''
+for key in itemDict:
+    cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", key, itemDict[key][0], itemDict[key][1], itemDict[key][2])
+    #print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
+'''
+cur.executemany("INSERT INTO items VALUES (?, ?, ?, ?)", itemarray)
+
+#cur.execute("DELETE FROM items")
+
+#cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+for row in cur.execute("SELECT * FROM items"):
+    print(row)
+
+conn.commit()
+
+
+
+conn.close()
+
+
+
+
+
+
+
+
+
+'''
 # Function that searches for user-input query.
 def searchItems(query):
     print("---------- SEARCHES FOR \""+query+"\" ----------")
@@ -148,5 +159,4 @@ while userInput != "QUIT":
 if userInput == "QUIT":
     sys.exit()
 
-
-    '''
+'''
