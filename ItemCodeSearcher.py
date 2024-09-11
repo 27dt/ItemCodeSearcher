@@ -2,21 +2,23 @@ import sys
 import sqlite3
 
 conn = sqlite3.connect('items.db')
-
 cur = conn.cursor()
 
-'''
-cur.execute(
-    """CREATE TABLE items (
-        ID          int,
-        Name        text,
-        Category    text,
-        Price       real
-        )""")
-'''
+# Used for nuking the current items table and creating it again
+def rebuild_table():
+    cur.execute("DROP TABLE items")
 
-#cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+    cur.execute(
+        """CREATE TABLE items (
+            ID          int,
+            Name        text,
+            Category    text,
+            Price       real,
+            unique      (ID)
         
+            )""")
+    
+
 # Function that reads txt file, and converts lines into a dictionary.
 def createDict():
     # Opens file for reading and initializes dictionary.
@@ -36,32 +38,47 @@ def createDict():
     # Closes file.
     fhndl.close()
 
+'''
 createDict()
 
 itemarray = []
 for key in itemDict:
-    itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
+    itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))   
 
 #print (itemarray)
 
 '''
-for key in itemDict:
-    cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", key, itemDict[key][0], itemDict[key][1], itemDict[key][2])
+#for key in itemDict:
+    #cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", key, itemDict[key][0], itemDict[key][1], itemDict[key][2])
     #print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
 '''
+    
 cur.executemany("INSERT INTO items VALUES (?, ?, ?, ?)", itemarray)
 
-#cur.execute("DELETE FROM items")
 
-#cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+#cur.execute("DELETE FROM items")
+'''
+
+
+try:
+    cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+except:
+    print("This item ID already exists. Please change it.\n")
+
+
 for row in cur.execute("SELECT * FROM items"):
     print(row)
 
 conn.commit()
-
-
-
 conn.close()
+
+
+
+
+
+
+
+
 
 
 
@@ -158,5 +175,4 @@ while userInput != "QUIT":
 # Uses sys to terminate program if "QUIT" is input.
 if userInput == "QUIT":
     sys.exit()
-
 '''
