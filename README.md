@@ -19,7 +19,7 @@ This way, the new item becomes a part of the existing list, and the user now has
 
 ---------------------------------------------------------------------------------------------------------------
 
-AUGUST 2024:
+**AUGUST 2024:**
 I have uploaded this project to Github for easier developing, as I intend on overhauling it:
 
 1) Add DB functionality with SQLite3 to create a table of items
@@ -33,3 +33,11 @@ I have uploaded this project to Github for easier developing, as I intend on ove
 2) Use TKinter to go from a text interface to a GUI
     - This allows for an easier-to-use program
     - This allows me to overhaul the interface of the program (button creation, etc.)
+
+**Quick Start**
+To delete and reload the table, as well as reload the default entries, do the following:
+```python
+rebuild_table()
+createDict()
+
+```

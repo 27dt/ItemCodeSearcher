@@ -4,23 +4,26 @@ import sqlite3
 conn = sqlite3.connect('items.db')
 cur = conn.cursor()
 
-# Used for nuking the current items table and creating it again
 def rebuild_table():
-    cur.execute("DROP TABLE items")
-
-    cur.execute(
-        """CREATE TABLE items (
-            ID          int,
-            Name        text,
-            Category    text,
-            Price       real,
-            unique      (ID)
+    # Nukes the current items table and creates it again.
+    # Note: a unique identifier is used on item_id to prevent duplicates.
+    try:
+        cur.execute("DROP TABLE items")
+    except:
+        print("item table doesn't already exist.")
+    finally:
+        cur.execute(
+            """CREATE TABLE items (
+                item_id     int,
+                name        text,
+                category    text,
+                price       real,
+                unique      (item_id)
         
-            )""")
-    
+                )""")
 
-# Function that reads txt file, and converts lines into a dictionary.
-def createDict():
+def reloadDefault():
+    # One-time helper function that reads existing txt file and creates dict out of entries.
     # Opens file for reading and initializes dictionary.
     fhndl = open("ItemCodes.txt", "r")
     
@@ -38,39 +41,25 @@ def createDict():
     # Closes file.
     fhndl.close()
 
-'''
+'''RELOADING TABLE PROCESS________________________
+rebuild_table()
 createDict()
 
 itemarray = []
 for key in itemDict:
     itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))   
 
-#print (itemarray)
 
+for key in itemDict:
+    cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
+    print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
 '''
-#for key in itemDict:
-    #cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", key, itemDict[key][0], itemDict[key][1], itemDict[key][2])
-    #print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
-'''
-    
-cur.executemany("INSERT INTO items VALUES (?, ?, ?, ?)", itemarray)
 
 
 #cur.execute("DELETE FROM items")
-'''
 
 
-try:
-    cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
-except:
-    print("This item ID already exists. Please change it.\n")
 
-
-for row in cur.execute("SELECT * FROM items"):
-    print(row)
-
-conn.commit()
-conn.close()
 
 
 
@@ -109,8 +98,60 @@ def searchItems(query):
     
     # Prints number of results found (in case none are found).
     print(results, "results found.")
-  
+ ''' 
 
+def readItems(query):
+    print("---------- SEARCHES FOR \""+query+"\" ----------")
+
+    try:
+        for row in cur.execute("SELECT * FROM items WHERE Name LIKE " + str(query)):
+            print(row)
+
+    except:
+        print("Query isn't valid or doesn't match with an item.")
+
+    finally:
+        cur.execute("SELECT COUNT(*) FROM items")
+
+
+#rebuild_table()
+#createDict()
+
+'''
+try:
+    cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
+except:
+    print("This item ID already exists. Please change it.\n")
+'''
+
+'''
+for row in cur.execute("SELECT * FROM items"):
+    print(row)
+'''
+
+
+
+
+#readItems("chicken")
+
+conn.commit()
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 # Function that allows user to add new item to existing list.
 def addItems(code, name):
     # Opens file for appending.
