@@ -38,6 +38,6 @@ I have uploaded this project to Github for easier developing, as I intend on ove
 To delete and reload the table, as well as reload the default entries, do the following:
 ```python
 rebuild_table()
-createDict()
+reload_default()
 
 ```

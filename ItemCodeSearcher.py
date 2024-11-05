@@ -22,14 +22,13 @@ def rebuild_table():
         
                 )""")
 
-def reloadDefault():
-    # One-time helper function that reads existing txt file and creates dict out of entries.
+def reload_default():
+    # One-time helper function that reloads default table values from backup txt file.
     # Opens file for reading and initializes dictionary.
     fhndl = open("ItemCodes.txt", "r")
     
-    # Initializes dictionary as global, so it can be accessed by other functions.
-    global itemDict
     itemDict = {}
+    itemarray = []
 
     # Reads line and splits at comma, then adds line to dictionary, and stript \n character.
     for line in fhndl:
@@ -41,22 +40,16 @@ def reloadDefault():
     # Closes file.
     fhndl.close()
 
-'''RELOADING TABLE PROCESS________________________
-rebuild_table()
-createDict()
+    # Appends each item to itemarray
+    for key in itemDict:
+        itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))   
 
-itemarray = []
-for key in itemDict:
-    itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))   
+    # Uses itemarray to insert each item into the items table
+    for key in itemDict:
+        cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
+        # PRINT STATEMENT BELOW IS FOR DEBUGGING
+        #print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
 
-
-for key in itemDict:
-    cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
-    print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
-'''
-
-
-#cur.execute("DELETE FROM items")
 
 
 
@@ -115,7 +108,7 @@ def readItems(query):
 
 
 #rebuild_table()
-#createDict()
+#reload_default()
 
 '''
 try:
@@ -124,10 +117,10 @@ except:
     print("This item ID already exists. Please change it.\n")
 '''
 
-'''
+
 for row in cur.execute("SELECT * FROM items"):
     print(row)
-'''
+
 
 
 
