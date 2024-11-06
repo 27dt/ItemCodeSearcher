@@ -97,7 +97,7 @@ def readItems(query):
     print("---------- SEARCHES FOR \""+query+"\" ----------")
 
     try:
-        for row in cur.execute("SELECT * FROM items WHERE Name LIKE " + str(query)):
+        for row in cur.execute("SELECT * FROM items WHERE Name like '%" + str(query) + "%'"):
             print(row)
 
     except:
@@ -117,15 +117,15 @@ except:
     print("This item ID already exists. Please change it.\n")
 '''
 
-
+'''
 for row in cur.execute("SELECT * FROM items"):
     print(row)
+'''
 
 
 
 
-
-#readItems("chicken")
+readItems("chicken")
 
 conn.commit()
 conn.close()

@@ -1,0 +1,8 @@
+arch:
+
+db:
+items.db
+items_crud.py
+
+src:
+main.py
