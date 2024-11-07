@@ -77,7 +77,6 @@
 36204,Thighs,Turkey Parts,0.00
 36202,Split Wings,Turkey Parts,0.00
 35300,Turkey Sufra Halal,Turkey Sufra Halal,0.00
-51867,Veal Cutlets,Veal,0.00
 16719,PC Whole Chicken,Chicken PC,0.00
 12820,Pork Side Rib Cov,Pork,0.00
 51867,Fontaine Veal Leg Cutlets,Veal,0.00

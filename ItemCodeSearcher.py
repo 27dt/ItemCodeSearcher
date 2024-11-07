@@ -8,7 +8,7 @@ conn = sqlite3.connect('db/items.db')
 cur = conn.cursor()
 
 #rebuild_table()
-#reload_default()
+reload_default()
 
 conn.commit()
 
