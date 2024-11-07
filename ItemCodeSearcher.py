@@ -1,74 +1,19 @@
 import sys
 import sqlite3
 
-conn = sqlite3.connect('items.db')
+
+from default.load_default import *
+
+conn = sqlite3.connect('db/items.db')
 cur = conn.cursor()
 
-def rebuild_table():
-    # Nukes the current items table and creates it again.
-    # Note: a unique identifier is used on item_id to prevent duplicates.
-    try:
-        cur.execute("DROP TABLE items")
-    except:
-        print("item table doesn't already exist.")
-    finally:
-        cur.execute(
-            """CREATE TABLE items (
-                item_id     int,
-                name        text,
-                category    text,
-                price       real,
-                unique      (item_id)
-        
-                )""")
+#rebuild_table()
+#reload_default()
 
-def reload_default():
-    # One-time helper function that reloads default table values from backup txt file.
-    # Opens file for reading and initializes dictionary.
-    fhndl = open("ItemCodes.txt", "r")
-    
-    itemDict = {}
-    itemarray = []
+conn.commit()
 
-    # Reads line and splits at comma, then adds line to dictionary, and stript \n character.
-    for line in fhndl:
-        itemCode, itemName, itemCat, itemPrice = line.split(",")
-        itemCode = int(itemCode)
-        itemPrice = float(itemPrice)
-        itemDict[itemCode] = [itemName, itemCat, itemPrice]
-
-    # Closes file.
-    fhndl.close()
-
-    # Appends each item to itemarray
-    for key in itemDict:
-        itemarray.append((key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))   
-
-    # Uses itemarray to insert each item into the items table
-    for key in itemDict:
-        cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (key, itemDict[key][0], itemDict[key][1], itemDict[key][2]))
-        # PRINT STATEMENT BELOW IS FOR DEBUGGING
-        #print("ID: " + str(key) + " NAME: " + itemDict[key][0] + " CAT: " + itemDict[key][1] + " PRICE: " + str(itemDict[key][2]) + "\n")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for row in cur.execute("SELECT * FROM items"):
+    print(row)
 
 '''
 # Function that searches for user-input query.
@@ -93,6 +38,7 @@ def searchItems(query):
     print(results, "results found.")
  ''' 
 
+'''
 def readItems(query):
     print("---------- SEARCHES FOR \""+query+"\" ----------")
 
@@ -104,8 +50,12 @@ def readItems(query):
         print("Query isn't valid or doesn't match with an item.")
 
     finally:
-        cur.execute("SELECT COUNT(*) FROM items")
+        cur.execute("SELECT COUNT() FROM items WHERE Name like '%" + str(query) + "%'")
+        print(str(cur.fetchone()) + " results found.")
 
+def createItems(item_id, item_name, item_cat, item_price):
+    pass
+'''
 
 #rebuild_table()
 #reload_default()
@@ -124,15 +74,15 @@ for row in cur.execute("SELECT * FROM items"):
 
 
 
-
+'''
 readItems("chicken")
+'''
 
-conn.commit()
+
+
+
+
 conn.close()
-
-
-
-
 
 
 
