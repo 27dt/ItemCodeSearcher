@@ -34,9 +34,10 @@ I have uploaded this project to Github for easier developing, as I intend on ove
     - This allows for an easier-to-use program
     - This allows me to overhaul the interface of the program (button creation, etc.)
 
-**Quick Start**
+**Quick Start:**
 To delete and reload the table, as well as reload the default entries, do the following:
 ```python
+
 rebuild_table()
 reload_default()
 

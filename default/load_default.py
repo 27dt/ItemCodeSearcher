@@ -1,12 +1,6 @@
-import sys
-import sqlite3
-
-def rebuild_table():
+def rebuild_table(conn, cur):
     # Nukes the current items table and creates it again.
     # Note: a unique identifier is used on item_id to prevent duplicates.
-    conn = sqlite3.connect('db/items.db')
-    cur = conn.cursor()
-    
     try:
         cur.execute("DROP TABLE items")
     except:
@@ -23,14 +17,10 @@ def rebuild_table():
                 )""")
         
     conn.commit()
-    conn.close()
 
-def reload_default():
+def reload_default(conn, cur):
     # One-time helper function that reloads default table values from backup txt file.
     # Opens file and reads entries into an array, for db insertion.
-    conn = sqlite3.connect('db/items.db')
-    cur = conn.cursor()
-
     fhndl = open("default/item_codes.txt", "r")
     
     itemarray = []
@@ -45,9 +35,10 @@ def reload_default():
     # Closes file.
     fhndl.close()
 
-    for item in itemarray:
-        #print(item)
-        cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (item[0], item[1], item[2], item[3]))
+    try:
+        for item in itemarray:
+            cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (item[0], item[1], item[2], item[3]))
+    except:
+        print("Error: Item(s) already exist. Please rebuild table before trying again.\n")
 
     conn.commit()
-    conn.close()

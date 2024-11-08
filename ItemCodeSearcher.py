@@ -1,42 +1,31 @@
 import sys
 import sqlite3
 
-
 from default.load_default import *
+from db.items_crud import *
 
+#------DB CONNECTION------#
 conn = sqlite3.connect('db/items.db')
 cur = conn.cursor()
 
-#rebuild_table()
-reload_default()
+#------FACTORY RESET------#
+#rebuild_table(conn, cur)
+#reload_default(conn, cur)
+
+#----------TESTS----------#
+#create_item(conn, cur, 12345, "Daniel", "Human", 100)
+#delete_item(conn, cur, 12345)
+#read_item(cur, 12345)
+#update_item(conn, cur, 12345, "Dannn0", "Creature", 3.33)
+#search_item(cur, "dan")
 
 conn.commit()
 
+#--------PRINT ALL--------#
 for row in cur.execute("SELECT * FROM items"):
     print(row)
 
-'''
-# Function that searches for user-input query.
-def searchItems(query):
-    print("---------- SEARCHES FOR \""+query+"\" ----------")
-    results = 0
 
-    # Loops through dictionary of items, appends matching items to list as tuple, and prints list.
-    searchList = []
-
-    for key in itemDict:
-        # Uses string.casefold() for case insensitive comparison.
-        if query.casefold() in itemDict[key].casefold():
-            searchList.append((key,itemDict[key]))
-            results += 1
-    
-    # Prints results.
-    for i in range(0, len(searchList)):
-        print(searchList[i])
-    
-    # Prints number of results found (in case none are found).
-    print(results, "results found.")
- ''' 
 
 '''
 def readItems(query):
@@ -52,35 +41,7 @@ def readItems(query):
     finally:
         cur.execute("SELECT COUNT() FROM items WHERE Name like '%" + str(query) + "%'")
         print(str(cur.fetchone()) + " results found.")
-
-def createItems(item_id, item_name, item_cat, item_price):
-    pass
 '''
-
-#rebuild_table()
-#reload_default()
-
-'''
-try:
-    cur.execute("INSERT INTO items VALUES (85522, 'PC FF Chicken Cutlets', 'PC Free From', 17.62)")
-except:
-    print("This item ID already exists. Please change it.\n")
-'''
-
-'''
-for row in cur.execute("SELECT * FROM items"):
-    print(row)
-'''
-
-
-
-'''
-readItems("chicken")
-'''
-
-
-
-
 
 conn.close()
 

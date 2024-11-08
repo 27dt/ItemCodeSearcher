@@ -6,3 +6,7 @@ items_crud.py
 
 src:
 main.py
+
+if moving to an actual backend with routes:
+dont print anything in the db functions. just throw a db error and handle the appropriate printing in the routes
+^consider an enum that holds OK or ERROR and act accordingly in the routes (i miss rust pattern matching)
