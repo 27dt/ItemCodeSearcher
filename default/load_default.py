@@ -1,12 +1,14 @@
-def rebuild_table(conn, cur):
+from db.models import DBConn, Item
+
+def rebuild_table(db: DBConn):
     # Nukes the current items table and creates it again.
     # Note: a unique identifier is used on item_id to prevent duplicates.
     try:
-        cur.execute("DROP TABLE items")
+        db.cur.execute("DROP TABLE items")
     except:
         print("Note: Item table doesn't already exist")
     finally:
-        cur.execute(
+        db.cur.execute(
             """CREATE TABLE items (
                 item_id     int,
                 name        text,
@@ -16,29 +18,27 @@ def rebuild_table(conn, cur):
         
                 )""")
         
-    conn.commit()
+    db.conn.commit()
 
-def reload_default(conn, cur):
+def reload_default(db: DBConn):
     # One-time helper function that reloads default table values from backup txt file.
     # Opens file and reads entries into an array, for db insertion.
     fhndl = open("default/item_codes.txt", "r")
     
-    itemarray = []
+    itemArray = []
 
     # Reads line and splits at comma, then adds line to dictionary, and stript \n character.
     for line in fhndl:
-        itemCode, itemName, itemCat, itemPrice = line.split(",")
-        itemCode = int(itemCode)
-        itemPrice = float(itemPrice)
-        itemarray.append((itemCode, itemName, itemCat, itemPrice))
+        item_id, name, category, price = line.split(",")
+        itemArray.append(Item(int(item_id), name, category, float(price)))
 
     # Closes file.
     fhndl.close()
 
     try:
-        for item in itemarray:
-            cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (item[0], item[1], item[2], item[3]))
+        for item in itemArray:
+            db.cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (item.item_id, item.name, item.category, item.price))
     except:
         print("Error: Item(s) already exist. Please rebuild table before trying again.\n")
 
-    conn.commit()
+    db.conn.commit()
