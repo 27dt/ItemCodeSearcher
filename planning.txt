@@ -5,3 +5,8 @@ dont print anything in the db functions. just throw a db error and handle the ap
 tkinter imp
 
 next: have functions return the items.
+
+consider having a specified return type for get and search. Read returns an Item. the others don't.
+(it will need to be an array or list or vector of some sort)
+
+implement tests under /tests.py?
