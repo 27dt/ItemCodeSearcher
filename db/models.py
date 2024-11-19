@@ -1,6 +1,6 @@
 # Item class for passing to DB
 class Item:
-    def __init__(self, item_id, name, category, price):
+    def __init__(self, item_id: int, name: str, category: str, price: int):
         self.item_id = item_id
         self.name = name
         self.category = category

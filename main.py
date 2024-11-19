@@ -1,6 +1,4 @@
-#import sys
 import sqlite3
-
 from tkinter import *
 
 from db.items_queries import *
@@ -10,87 +8,70 @@ from default.load_default import *
 #------DB CONNECTION------#
 db = DBConn(sqlite3.connect('db/items.db'))
 
-#------FACTORY RESET------#
-#rebuild_table(db)
-#reload_default(db)
-
-#----------TESTS----------#
-#create_item(db, Item(12345, "Daniel", "Human", 100))
-
-#delete_item(db, 12345)
-
-#read_item(db, 14218)
-
-#update_item(db, Item(12345, "Dannn0", "Creature", 3.33))
-
-#search_item(db, "chicken")
-
-#get_all_items(db)
-
-db.conn.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-
-# Root Window
+#--------TKINTER UI-------#
 root = Tk()
+root.title('Item Management System')
+root.geometry('400x400')
 
-# Title and Dimensions
-root.title("ItemCodeSearcher")
-root.geometry('400x200')
+#------SUPPORT FUNCS------#
+# Clear fields
+def clear_fields():
+    itemid_box.delete(0, END)
+    name_box.delete(0, END)
+    category_box.delete(0, END)
+    price_box.delete(0, END)
 
-# adding menu bar in root window
-# new item in menu bar labelled as 'New'
-# adding more items in the menu bar 
+# Add Item
+def add_item():
+    item = Item(int(itemid_box.get()), name_box.get(), category_box.get(), float(price_box.get()))
+    create_item(db, item)
 
-# Menu Bar
-menu = Menu(root)
+# List All Items
+def list_items():
+    list_items_window = Tk()
+    list_items_window.title("List All Items")
+    list_items_window.geometry("400x600")
 
-# Item in Menu Bar
-item = Menu(menu)
-item.add_command(label='New')
+    #result = get_all_items()
 
-# Item can be found under File
-menu.add_cascade(label='File', menu=item)
-root.config(menu=menu)
+    #for item in result:
+        
 
+
+#--------TKINTER UI-------#
 # Label
-lbl = Label(root, text = "yuh")
-lbl.grid()
+title_label = Label(root, text="Item Management System V2.0", font="Arial")
+title_label.grid(row=0, column=0, columnspan=2, pady="10")
 
-txt = Entry(root, width=10)
-txt.grid(column=1, row=0)
+# Text for fields
+itemid_label = Label(root, text="Item ID: ").grid(row=1, column=0, sticky=W, padx=10)
+name_label = Label(root, text="Item Name: ").grid(row=2, column=0, sticky=W, padx=10)
+category_label = Label(root, text="Item Category: ").grid(row=3, column=0, sticky=W, padx=10)
+price_label = Label(root, text="Item Price: ").grid(row=4, column=0, sticky=W, padx=10)
 
-def clicked():
-    res = "you wrote " + txt.get() 
-    lbl.configure(text = res)
+# Forms for fields
+itemid_box = Entry(root)
+itemid_box.grid(row=1, column=1)
 
-btn = Button(root, text = "click me", fg = "red", command=clicked)
-btn.grid(column=2, row=0)
+name_box = Entry(root)
+name_box.grid(row=2, column=1)
+
+category_box = Entry(root)
+category_box.grid(row=3, column=1)
+
+price_box = Entry(root)
+price_box.grid(row=4, column=1)
+
+# Buttons
+add_item_button = Button(root, text="Add Item", command=add_item)
+add_item_button.grid(row=5, column=0, padx=10, pady=10)
+
+clear_fields_button = Button(root, text="Clear Fields", command=clear_fields)
+clear_fields_button.grid(row=5, column=1)
+
+list_all_items_button = Button(root, text="List All Items", command=list_items)
+list_all_items_button.grid(row=6, column=0)
 
 root.mainloop()
 
-'''
+db.conn.close()
