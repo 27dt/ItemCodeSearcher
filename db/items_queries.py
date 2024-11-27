@@ -62,8 +62,10 @@ def get_all_items(db: DBConn):
         for row in db.cur.execute("SELECT * FROM items"):
             request = Item(row[0], row[1], row[2], row[3])
             print(request)
+            print("this is a break")
             response.append(request)
         
+        print("-------------------------line break----------------------------\n\n")
         return response
     except:
         print("Error.\n")

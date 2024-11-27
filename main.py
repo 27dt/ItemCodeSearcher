@@ -1,5 +1,6 @@
 import sqlite3
 from tkinter import *
+from tkinter import ttk
 
 from db.items_queries import *
 from db.models import DBConn, Item
@@ -26,17 +27,46 @@ def add_item():
     item = Item(int(itemid_box.get()), name_box.get(), category_box.get(), float(price_box.get()))
     create_item(db, item)
 
+# Delete Item
+def delete_items():
+    item = Item(int(itemid_box.get()), name_box.get(), category_box.get(), float(price_box.get()))
+    delete_item(db, item.item_id)
+
 # List All Items
 def list_items():
     list_items_window = Tk()
     list_items_window.title("List All Items")
-    list_items_window.geometry("400x600")
+    list_items_window.geometry("600x300")
+    list_frame = Frame(list_items_window)
+    list_frame.pack(pady=20)
 
-    #result = get_all_items()
+    list_scroll = Scrollbar(list_frame)
+    list_scroll.pack(side=RIGHT, fill=Y)
 
-    #for item in result:
-        
 
+    list_tree = ttk.Treeview(list_frame, yscrollcommand=list_scroll.set)
+    list_tree.pack()
+
+    list_scroll.config(command=list_tree.yview)
+    
+    list_tree['columns'] = ("ID", "Name", "Category", "Price")
+
+    list_tree.column("#0", width=50, minwidth=25)
+    list_tree.column("ID", anchor=W, width=60)
+    list_tree.column("Name", anchor=CENTER, width=160)
+    list_tree.column("Category", anchor=W, width=120)
+    list_tree.column("Price", anchor=W, width=50)
+
+    list_tree.heading("#0", text="Label", anchor=W)
+    list_tree.heading("ID", text="Item ID", anchor=W)
+    list_tree.heading("Name", text="Name", anchor=CENTER)
+    list_tree.heading("Category", text="Category", anchor=W)
+    list_tree.heading("Price", text="Price", anchor=W)
+
+    result = get_all_items(db)
+
+    for i in range(0, len(result)):
+        list_tree.insert(parent='', index='end', iid=i, text="Item", values=(result[i].item_id, str(result[i].name), str(result[i].category), result[i].price))
 
 #--------TKINTER UI-------#
 # Label
@@ -71,6 +101,9 @@ clear_fields_button.grid(row=5, column=1)
 
 list_all_items_button = Button(root, text="List All Items", command=list_items)
 list_all_items_button.grid(row=6, column=0)
+
+delete_item_button = Button(root, text="Delete Item", command=delete_items)
+delete_item_button.grid(row=6, column=1)
 
 root.mainloop()
 

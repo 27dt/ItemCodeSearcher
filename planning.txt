@@ -10,3 +10,16 @@ consider having a specified return type for get and search. Read returns an Item
 (it will need to be an array or list or vector of some sort)
 
 implement tests under /tests.py?
+
+
+set up again with classes. add set types.
+
+fix the names. what i mean by this is that we have delete_item in db and then delete_item in main. fix that.
+
+error checking on tkinter UI functions. wrap in a try block and if an exception is caught, display a text label 
+i.e. if someone tries to add an item and leaves the fields blank, either:
+1. display an error message
+2. display either an 'invalid fields' or ' duplicate item' 
+3. return the db error message
+
+^ CONSIDER MAKING THE ERROR MESSAGES, AND USE A RETURN OF AN ARRAY WITH A RETURN AND AN ERROR THING. RUUST PATTERN MATCHING.
