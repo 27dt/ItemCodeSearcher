@@ -1,12 +1,12 @@
 from db.models import DBConn, Item
 
-def rebuild_table(db: DBConn):
+def rebuild_table(db: DBConn): 
     # Nukes the current items table and creates it again.
     # Note: a unique identifier is used on item_id to prevent duplicates.
     try:
         db.cur.execute("DROP TABLE items")
     except:
-        print("Note: Item table doesn't already exist")
+        print("Note: Item table doesn't already exist. Will continue.")
     finally:
         db.cur.execute(
             """CREATE TABLE items (
@@ -19,6 +19,7 @@ def rebuild_table(db: DBConn):
                 )""")
         
     db.conn.commit()
+    print("Database has been cleared and rebuilt.")
 
 def reload_default(db: DBConn):
     # One-time helper function that reloads default table values from backup txt file.
@@ -42,3 +43,4 @@ def reload_default(db: DBConn):
         print("Error: Item(s) already exist. Please rebuild table before trying again.\n")
 
     db.conn.commit()
+    print ("Database has been reloaded with default values.")
