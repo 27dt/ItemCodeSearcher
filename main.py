@@ -127,16 +127,33 @@ update_item_button.grid(row=0, column=2)
 delete_item_button = Button(buttons_frame, text="Delete", command=delete)
 delete_item_button.grid(row=0,column=3, padx=10)
 
+input_fields_frame = Frame(item_tab)
+input_fields_frame.pack()
 
+# Text for fields
+itemid_label = Label(input_fields_frame, text="Item ID: ").grid(row=1, column=0, sticky=W, padx=10, pady=10)
+name_label = Label(input_fields_frame, text="Item Name: ").grid(row=2, column=0, sticky=W, padx=10, pady=10)
+category_label = Label(input_fields_frame, text="Item Category: ").grid(row=3, column=0, sticky=W, padx=10, pady=10)
+price_label = Label(input_fields_frame, text="Item Price: ").grid(row=4, column=0, sticky=W, padx=10, pady=10)
 
+# Forms for fields
+itemid_box = Entry(input_fields_frame)
+itemid_box.grid(row=1, column=1)
 
+name_box = Entry(input_fields_frame)
+name_box.grid(row=2, column=1)
 
+category_box = Entry(input_fields_frame)
+category_box.grid(row=3, column=1)
+
+price_box = Entry(input_fields_frame)
+price_box.grid(row=4, column=1)
 
 # Search Tab
 search_label = Label(search_tab, text="Please enter a search query below:").place(relx=0.5, rely=0.1, anchor=CENTER)
 search_box = Entry(search_tab, width=50).place(relx=0.5, rely=0.2, anchor=CENTER)
-
 search_button = Radiobutton(search_tab, text="Search").grid(column=0, row=1)
+
 
 
 
@@ -149,7 +166,6 @@ root.mainloop()
 
 
 '''
-
 #------SUPPORT FUNCS------#
 # Clear fields
 def clear_fields():
@@ -191,18 +207,4 @@ category_box.grid(row=3, column=1)
 
 price_box = Entry(root)
 price_box.grid(row=4, column=1)
-
-# Buttons
-add_item_button = Button(root, text="Add Item", command=add_item)
-add_item_button.grid(row=5, column=0, padx=10, pady=10)
-
-clear_fields_button = Button(root, text="Clear Fields", command=clear_fields)
-clear_fields_button.grid(row=5, column=1)
-
-delete_item_button = Button(root, text="Delete Item", command=delete_items)
-delete_item_button.grid(row=6, column=1)
-
-root.mainloop()
-
-db.conn.close()
 '''

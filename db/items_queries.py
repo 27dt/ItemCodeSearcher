@@ -1,5 +1,6 @@
 from db.models import *
 
+
 def create_item(db: DBConn, item: Item):   
     try:
         db.cur.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (item.item_id, item.name, item.category, item.price))
